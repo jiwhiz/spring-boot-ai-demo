@@ -1,0 +1,28 @@
+logging:
+  level:
+    ROOT: INFO
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+    com.jiwhiz: DEBUG
+
+spring:
+  application:
+    version: local-snapshot
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+
+app:
+  security:
+    authentication:
+      jwt:
+        # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
+        base64-secret: KMMVXKYzORmQkLSgPE1MQ9iL7k4WHPTgsGO1SBHypfnpAM1npbz/9q8NoavNPcRllt0oMsM6kEjLfFb1pnC/2g==
+        # Token is valid 24 hours
+        token-validity-in-seconds: 86400
