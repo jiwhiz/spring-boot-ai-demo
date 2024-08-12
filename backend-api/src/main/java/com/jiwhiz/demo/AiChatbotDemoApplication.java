@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class AiChatbotDemoApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(AiChatbotDemoApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(AiChatbotDemoApplication.class, args);
+    }
 
 }
