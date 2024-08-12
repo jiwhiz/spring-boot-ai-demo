@@ -1,0 +1,62 @@
+logging:
+  level:
+    ROOT: INFO
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+    com.jiwhiz: DEBUG
+
+spring:
+  application:
+    version: local-snapshot
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://localhost:5432/demodatabase
+    username: walle
+    password: walle
+    hikari:
+      poolName: Hikari
+      auto-commit: false
+
+management:
+  server:
+    port: 8091
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+app:
+  security:
+    authentication:
+      jwt:
+        # This token must be encoded using Base64 and be at least 256 bits long (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
+        base64-secret: 93UCjRVR4BpHdYwudSM2mes0dz7DZl8Y3dKAv5gLMrH06zwvr3YD/XrEWyS59y5LQGNw+0PykopMh77g
+        # Token is valid 24 hours, and remember me for 30 days
+        token-validity-in-seconds: 86400
+        token-validity-in-seconds-for-remember-me: 2592000
+  cors:
+    # Allow local angular web server
+    allowed-origins: 'http://localhost:4200'
+    # Enable CORS when running in GitHub Codespaces
+    allowed-origin-patterns: 'https://*.githubpreview.dev'
+    allowed-methods: '*'
+    allowed-headers: '*'
+    exposed-headers: 'Authorization,Link,X-Total-Count,X-${spring.application.name}-alert,X-${spring.application.name}-error,X-${spring.application.name}-params'
+    allow-credentials: true
+    max-age: 1800
+
