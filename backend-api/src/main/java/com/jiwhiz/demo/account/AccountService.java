@@ -55,7 +55,7 @@ public class AccountService {
         newUser.setLastName(registrationDTO.lastName());
 
         // new user is not active
-        newUser.setActivated(true);  // TODO change to false later
+        newUser.setActivated(false);
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         Set<Authority> authorities = new HashSet<>();
