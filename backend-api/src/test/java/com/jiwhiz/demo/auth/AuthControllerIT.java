@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jiwhiz.demo.ControllerAbstractIT;
 import com.jiwhiz.demo.TestUtil;
+import com.jiwhiz.demo.common.Constants;
 import com.jiwhiz.demo.user.User;
 import com.jiwhiz.demo.user.UserRepository;
 
@@ -45,7 +46,7 @@ public class AuthControllerIT extends ControllerAbstractIT {
         AuthRequestDTO login = new AuthRequestDTO("user-jwt-controller@example.com", "test", false);
         mockMvc
             .perform(
-                post("/api/v1/authenticate")
+                post(Constants.API_ENDPOINT_BASE + "/authenticate")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(login)))
             .andExpect(status().isOk())
@@ -66,7 +67,7 @@ public class AuthControllerIT extends ControllerAbstractIT {
         AuthRequestDTO login = new AuthRequestDTO("user-jwt-controller-remember-me@example.com", "test", true);
         mockMvc
             .perform(
-                post("/api/v1/authenticate")
+                post(Constants.API_ENDPOINT_BASE + "/authenticate")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(login))
             )
@@ -82,7 +83,7 @@ public class AuthControllerIT extends ControllerAbstractIT {
 
         mockMvc
             .perform(
-                post("/api/v1/authenticate")
+                post(Constants.API_ENDPOINT_BASE + "/authenticate")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(login))
             )

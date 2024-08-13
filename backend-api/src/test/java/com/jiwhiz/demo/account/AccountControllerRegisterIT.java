@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jiwhiz.demo.TestUtil;
+import com.jiwhiz.demo.common.Constants;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -31,7 +32,7 @@ public class AccountControllerRegisterIT extends AccountControllerAbstractIT {
 
         restAccountMockMvc
             .perform(
-                post("/api/v1/register")
+                post(Constants.API_ENDPOINT_BASE + "/register")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(registrationDTO))
             )

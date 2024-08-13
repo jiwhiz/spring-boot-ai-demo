@@ -1,6 +1,7 @@
 package com.jiwhiz.demo.config;
 
 import com.jiwhiz.demo.common.ApplicationProperties;
+import com.jiwhiz.demo.common.Constants;
 import com.jiwhiz.demo.security.JWTTokenFilter;
 import com.jiwhiz.demo.security.JWTTokenService;
 
@@ -51,8 +52,8 @@ public class SecurityConfig {
             .addFilterBefore(new JWTTokenFilter(jwtTokenService), UsernamePasswordAuthenticationFilter.class)
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .requestMatchers("/api/v1/authenticate").permitAll()
-                .requestMatchers("/api/v1/register").permitAll()
+                .requestMatchers(Constants.API_ENDPOINT_BASE + "/authenticate").permitAll()
+                .requestMatchers(Constants.API_ENDPOINT_BASE + "/register").permitAll()
                 .anyRequest().authenticated()
             )
             .httpBasic(Customizer.withDefaults())

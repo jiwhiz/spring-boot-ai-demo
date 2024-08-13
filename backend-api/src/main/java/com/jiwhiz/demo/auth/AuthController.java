@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jiwhiz.demo.common.Constants;
 import com.jiwhiz.demo.security.JWTTokenService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping(Constants.API_ENDPOINT_BASE)
 @RequiredArgsConstructor
 @Slf4j
 public class AuthController {
