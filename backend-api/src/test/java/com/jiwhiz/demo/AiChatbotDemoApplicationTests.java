@@ -10,8 +10,8 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles("test")
 class AiChatbotDemoApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+    }
 
 }
