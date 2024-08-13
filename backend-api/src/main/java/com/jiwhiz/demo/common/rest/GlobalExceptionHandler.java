@@ -17,14 +17,17 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import com.jiwhiz.demo.common.exception.BusinessException;
 
 import jakarta.persistence.OptimisticLockException;
+import lombok.extern.slf4j.Slf4j;
 
 @ControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     protected ResponseEntity<Object> handleRuntimeError(
             final RuntimeException ex, final WebRequest request) {
+        log.warn("Got RuntimeException!", ex);
         return handleExceptionInternal(ex, null,
                 new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
