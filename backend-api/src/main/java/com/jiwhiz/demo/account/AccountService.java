@@ -40,29 +40,28 @@ public class AccountService {
         }
 
         userRepository
-                .findOneByEmailIgnoreCase(registrationDTO.email())
-                .ifPresent(existingUser -> {
-                    boolean removed = removeNonActivatedUser(existingUser);
-                    if (!removed) {
-                        throw new EmailAlreadyUsedException();
-                    }
-                });
-        User newUser = new User();
-        String encryptedPassword = passwordEncoder.encode(registrationDTO.password());
-        newUser.setEmail(registrationDTO.email().toLowerCase());
-        newUser.setPassword(encryptedPassword);
-        newUser.setFirstName(registrationDTO.firstName());
-        newUser.setLastName(registrationDTO.lastName());
+            .findOneByEmailIgnoreCase(registrationDTO.email())
+            .ifPresent(existingUser -> {
+                boolean removed = removeNonActivatedUser(existingUser);
+                if (!removed) {
+                    throw new EmailAlreadyUsedException();
+                }
+            });
 
-        // new user is not active
-        newUser.setActivated(false);
-        // new user gets registration key
-        newUser.setActivationKey(RandomUtil.generateActivationKey());
         Set<Authority> authorities = new HashSet<>();
         authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
-        newUser.setAuthorities(authorities);
+        User newUser =
+            User.builder()
+                .email(registrationDTO.email().toLowerCase())
+                .password(passwordEncoder.encode(registrationDTO.password()))
+                .firstName(registrationDTO.firstName())
+                .lastName(registrationDTO.lastName())
+                .activated(false) // new user is not active
+                .activationKey(RandomUtil.generateActivationKey()) // new user gets registration key
+                .authorities(authorities)
+                .build();
         userRepository.save(newUser);
-        log.debug("Created new record for User: {}", newUser);
+        log.debug("Created new record for User: {}", newUser.getEmail());
         return newUser;
     }
 
