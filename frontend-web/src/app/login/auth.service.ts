@@ -20,8 +20,8 @@ interface Authenticate$Params {
   body: AuthRequest
 }
 
-function authenticate(http: HttpClient, rootUrl: string, params: Authenticate$Params,
-    context?: HttpContext): Observable<StrictHttpResponse<AuthResponse>> {
+function authenticate(http: HttpClient, rootUrl: string, params: Authenticate$Params, context?: HttpContext)
+          : Observable<StrictHttpResponse<AuthResponse>> {
   const rb = new RequestBuilder(rootUrl, authenticate.PATH, 'post');
   if (params) {
     rb.body(params.body, 'application/json');
@@ -50,7 +50,8 @@ export class AuthenticationService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  authenticate$Response(params: Authenticate$Params, context?: HttpContext): Observable<StrictHttpResponse<AuthResponse>> {
+  authenticate$Response(params: Authenticate$Params, context?: HttpContext)
+      : Observable<StrictHttpResponse<AuthResponse>> {
     return authenticate(this.http, this.rootUrl, params, context);
   }
 
@@ -60,7 +61,8 @@ export class AuthenticationService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  authenticate(params: Authenticate$Params, context?: HttpContext): Observable<AuthResponse> {
+  authenticate(params: Authenticate$Params, context?: HttpContext)
+      : Observable<AuthResponse> {
     return this.authenticate$Response(params, context).pipe(
       map((r: StrictHttpResponse<AuthResponse>): AuthResponse => r.body)
     );

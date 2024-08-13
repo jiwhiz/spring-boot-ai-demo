@@ -60,6 +60,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ErrorResponse handleAuthenticationException(
             final AuthenticationException ex, final WebRequest request) {
+        log.warn("Got AuthenticationException!", ex);
         return ErrorResponse.builder(ex, HttpStatus.UNAUTHORIZED, ex.getMessage())
                 .title("Login Failed")
                 .detail("You entered wrong username or password, please try again.")
