@@ -4,6 +4,9 @@
   <div class="alert alert-danger" role="alert" *ngIf="errorMsg.length">
     <p *ngFor="let msg of errorMsg">{{msg}}</p>
   </div>
+  <div class="alert alert-success" role="alert" *ngIf="infoMsg.length">
+    <p *ngFor="let msg of infoMsg">{{msg}}</p>
+  </div>
   <div class="mb-3">
     <label for="firstname" class="form-label">Firstname</label>
     <input [(ngModel)]="registerRequest.firstname" type="text" class="form-control" id="firstname" placeholder="Firstname">

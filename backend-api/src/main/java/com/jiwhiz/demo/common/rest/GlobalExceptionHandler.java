@@ -26,8 +26,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     protected ResponseEntity<Object> handleRuntimeError(
-            final RuntimeException ex, final WebRequest request) {
-        log.warn("Got RuntimeException!", ex);
+        final RuntimeException ex, final WebRequest request
+    ) {
+        log.warn("Got RuntimeException! Please take a look and investigate.", ex);
         return handleExceptionInternal(ex, null,
                 new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
@@ -35,7 +36,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(BusinessException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleBusinessError(
-            final BusinessException ex, final WebRequest request) {
+            final BusinessException ex, final WebRequest request
+    ) {
+        log.info("Got BusinessException: {}", ex.getMessage());
         return ErrorResponse.builder(ex, HttpStatus.BAD_REQUEST, ex.getMessage())
                 .title("Business Validation Failed")
                 .type(URI.create("https://api.jiwhiz.com/errors/validation"))
@@ -47,7 +50,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(OptimisticLockException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     public ErrorResponse handleOptimisticLockException(
-            final OptimisticLockException ex, final WebRequest request) {
+            final OptimisticLockException ex, final WebRequest request
+    ) {
         return ErrorResponse.builder(ex, HttpStatus.CONFLICT, ex.getMessage())
                 .title("Optimistic Locking Error")
                 .type(URI.create("https://api.jiwhiz.com/errors/optimisticlocking"))
@@ -59,7 +63,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ErrorResponse handleAuthenticationException(
-            final AuthenticationException ex, final WebRequest request) {
+            final AuthenticationException ex, final WebRequest request
+    ) {
         log.warn("Got AuthenticationException!", ex);
         return ErrorResponse.builder(ex, HttpStatus.UNAUTHORIZED, ex.getMessage())
                 .title("Login Failed")

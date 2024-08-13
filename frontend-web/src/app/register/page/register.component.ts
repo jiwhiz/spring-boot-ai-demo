@@ -12,6 +12,7 @@ export class RegisterComponent {
 
   registerRequest: RegistrationRequest = {email: '', firstname: '', lastname: '', password: ''};
   errorMsg: Array<string> = [];
+  infoMsg: Array<string> = [];
 
   constructor(
     private router: Router,
@@ -31,10 +32,13 @@ export class RegisterComponent {
     })
       .subscribe({
         next: () => {
-          this.router.navigate(['login']);
+          this.errorMsg = [];
+          this.infoMsg = ['You have successfully registered a new account. Please check your email to activate your account!']
         },
         error: (err) => {
-          this.errorMsg = err.error.validationErrors;
+          console.log(err);
+          this.infoMsg = [];
+          this.errorMsg = [err.error.detail];
         }
       });
   }
