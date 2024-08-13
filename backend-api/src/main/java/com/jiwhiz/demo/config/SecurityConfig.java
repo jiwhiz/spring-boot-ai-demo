@@ -43,12 +43,10 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         // @formatter:off
         http
-            .csrf((csrf) -> csrf.ignoringRequestMatchers("/ws/**").disable()) //???
+            .csrf(AbstractHttpConfigurer::disable)
             .cors((cors) -> cors
                 .configurationSource(request -> appProperties.getCors())
             )
-            .csrf(AbstractHttpConfigurer::disable)
-            .cors(AbstractHttpConfigurer::disable)
             .addFilterBefore(new JWTTokenFilter(jwtTokenService), UsernamePasswordAuthenticationFilter.class)
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
@@ -57,7 +55,6 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
             )
             .httpBasic(Customizer.withDefaults())
-            .rememberMe(Customizer.withDefaults())
             .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             ;
         // @formatter:on
@@ -76,4 +73,5 @@ public class SecurityConfig {
         provider.setUserDetailsService(userDetailsService);
         return new ProviderManager(provider);
     }
+
 }

@@ -9,6 +9,7 @@ logging:
             sql:
               BasicBinder: TRACE
     com.jiwhiz: DEBUG
+    org.springframework.security: DEBUG
 
 spring:
   application:
@@ -45,7 +46,7 @@ app:
     authentication:
       jwt:
         # This token must be encoded using Base64 and be at least 256 bits long (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
-        base64-secret: 93UCjRVR4BpHdYwudSM2mes0dz7DZl8Y3dKAv5gLMrH06zwvr3YD/XrEWyS59y5LQGNw+0PykopMh77g
+        base64-secret: cjwIAGnYyQZziQaugcItQUJCcUC5hi8EDCPCBsvP0j1U6dVqO969zYolIELIwv55I1HHTtPTOmnubRNLBipbOsmOJhHA2F2Z/Ylsd48FiaFDwtJTGAf9PtIjnHS+mMgkqGEiN9C5cuNL/yWF39RD+itfRsdvh5jP+b8juGTtRYR6Fdr4X7y+TwAT4hf6wq1yNaO2Qud5fbqTR0SlDE7wAopnLrn8tInlxJN9UXwvcparI66ItfFCFG2rbON5y+X+tkQHhU6CvwHfiJd51kPdD9FVgXUglnmSMYTG/6umGSKtl1C24PZDXvF8fIu8RqjBE5J1BUnHfg+mueuadaTLCg6e+sYF45HmuKnJhnFT0PQ/wyvcYASnZVrH67j8RyfYckVPyHr1loOdva0W7Cy5q3DxLbEMbfFgcSDkWHTCNOX1jftsryuBh5XIIXlyluHLXmfk+YKrE+/F0OC9w5J5mbQabtu47RO5e+oO7f3NHm7bV1YLrxL/I8Sujr4rvTdCEAyuR2jJAdTSEuEvlnsOubaWzYyY2SF90+ARn3KAO4kNpVZPqJTijg0BpxJHnMM6w5ptEOgNCMxU9OpWBAz+4nVAONJeSxj2N53g6gvGsYzYIlq0FZgVLXvzrY1vjAPyz9kVZ8x0wb+8xfdXwY6uWa1JlU4KCaO9qu9RhKAo=
         # Token is valid 24 hours, and remember me for 30 days
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000
