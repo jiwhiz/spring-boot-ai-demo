@@ -85,7 +85,7 @@ public class AccountControllerRegisterIT extends AccountControllerAbstractIT {
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(registrationDTO)))
             .andExpect(status().isBadRequest())
-            .andExpect(jsonPath("$.title").value("Bad Request"))
+            .andExpect(jsonPath("$.title").value("Business Validation Failed"))
         ;
 
         Optional<User> user = userRepository.findOneByEmailIgnoreCase("bob@example.com");
