@@ -21,6 +21,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @RequiredArgsConstructor
 @Slf4j
 public class JWTTokenFilter extends OncePerRequestFilter {
+
     public static final String AUTHORIZATION_HEADER = "Authorization";
 
     private final JWTTokenService tokenService;

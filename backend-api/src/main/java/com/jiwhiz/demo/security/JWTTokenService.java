@@ -48,7 +48,6 @@ public class JWTTokenService {
     public JWTTokenService(ApplicationProperties appProperties) {
         byte[] keyBytes;
         String secret = appProperties.getSecurity().getAuthentication().getJwt().getBase64Secret();
-        log.info("secret is {}", secret);
         if (!ObjectUtils.isEmpty(secret)) {
             log.debug("Using a Base64-encoded JWT secret key");
             keyBytes = Decoders.BASE64.decode(secret);
@@ -69,7 +68,7 @@ public class JWTTokenService {
 
     }
 
-    public String createToken(Authentication authentication) {
+    public String createToken(Authentication authentication, boolean rememberMe) {
         String authorities = authentication
             .getAuthorities()
             .stream()
@@ -77,7 +76,12 @@ public class JWTTokenService {
             .collect(Collectors.joining(","));
 
         Date now = new Date();
-        Date validity = new Date(now.getTime() + this.tokenValidityInMilliseconds);  // TODO: rememberMe
+        Date validity;
+        if (rememberMe) {
+            validity = new Date(now.getTime() + this.tokenValidityInMillisecondsForRememberMe);
+        } else {
+            validity = new Date(now.getTime() + this.tokenValidityInMilliseconds);
+        }
 
         return Jwts
             .builder()

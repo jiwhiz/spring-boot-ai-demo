@@ -51,9 +51,10 @@ public class SecurityConfig {
             .addFilterBefore(new JWTTokenFilter(jwtTokenService), UsernamePasswordAuthenticationFilter.class)
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .requestMatchers("/api/v1/auth/**").permitAll()
+                .requestMatchers("/api/v1/authenticate").permitAll()
                 .anyRequest().authenticated()
             )
+            .httpBasic(Customizer.withDefaults())
             .rememberMe(Customizer.withDefaults())
             .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             ;
