@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpTokenInterceptor } from './services/interceptor/http-token.interceptor';
+import { ActivateAccountComponent } from './activate/page/activate.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { HttpTokenInterceptor } from './services/interceptor/http-token.intercep
     HomeComponent,
     LoginComponent,
     RegisterComponent,
+    ActivateAccountComponent
   ],
   imports: [
       BrowserModule,

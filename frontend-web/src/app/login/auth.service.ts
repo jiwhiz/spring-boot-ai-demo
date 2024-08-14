@@ -43,24 +43,11 @@ export class AuthenticationService extends BaseService {
     super(config, http);
   }
 
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `authenticate()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
   authenticate$Response(params: Authenticate$Params, context?: HttpContext)
       : Observable<StrictHttpResponse<AuthResponse>> {
     return authenticate(this.http, this.rootUrl, params, context);
   }
 
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `authenticate$Response()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
   authenticate(params: Authenticate$Params, context?: HttpContext)
       : Observable<AuthResponse> {
     return this.authenticate$Response(params, context).pipe(

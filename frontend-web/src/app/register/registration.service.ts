@@ -43,24 +43,12 @@ export class RegistrationService extends BaseService {
     super(config, http);
   }
 
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `register()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
   register$Response(params: Register$Params, context?: HttpContext)
       : Observable<StrictHttpResponse<{}>> {
       return register(this.http, this.rootUrl, params, context);
     }
 
-    /**
-     * This method provides access only to the response body.
-     * To access the full response (for headers, for example), `register$Response()` instead.
-     *
-     * This method sends `application/json` and handles request body of type `application/json`.
-     */
-    register(params: Register$Params, context?: HttpContext)
+  register(params: Register$Params, context?: HttpContext)
         : Observable<{}> {
       return this.register$Response(params, context).pipe(
         map((r: StrictHttpResponse<{}>): {} => r.body)
