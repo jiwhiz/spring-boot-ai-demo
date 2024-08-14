@@ -3,6 +3,8 @@ package com.jiwhiz.demo.config;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -21,6 +23,7 @@ import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBr
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
+import com.jiwhiz.demo.common.ApplicationProperties;
 import com.jiwhiz.demo.security.JWTTokenService;
 
 @Configuration
@@ -30,12 +33,14 @@ import com.jiwhiz.demo.security.JWTTokenService;
 @Slf4j
 public class WebsocketConfig implements WebSocketMessageBrokerConfigurer {
 
+    private final ApplicationProperties appProperties;
+
     private final JWTTokenService jwtTokenService;
 
     @Override
     public void registerStompEndpoints(@NonNull StompEndpointRegistry registry) {
-        registry.addEndpoint("/ws").withSockJS();
-        registry.addEndpoint("/ws");
+        List<String> allowedOrigins = appProperties.getCors().getAllowedOrigins();
+        registry.addEndpoint("/ws").setAllowedOrigins(allowedOrigins.toArray(new String[allowedOrigins.size()])) ;
     }
 
     @Override

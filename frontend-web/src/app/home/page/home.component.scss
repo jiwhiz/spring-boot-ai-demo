@@ -12,3 +12,9 @@
 .chat-container .card-body {
   height: 40rem;
 }
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
