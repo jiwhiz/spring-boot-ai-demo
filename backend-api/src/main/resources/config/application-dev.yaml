@@ -42,6 +42,11 @@ management:
       application: ${spring.application.name}
 
 app:
+  mail:
+    enabled: false # change to true to turn on email through SendGrid and pass api key in command line
+    from: no_reply@jiwhiz.com
+    baseUrl: http://127.0.0.1:4200
+    apiKey: ${SENDGRID_API_KEY}
   security:
     authentication:
       jwt:

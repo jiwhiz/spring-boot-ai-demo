@@ -1,6 +1,7 @@
 package com.jiwhiz.demo.account;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -57,12 +58,26 @@ public class AccountService {
                 .firstName(registrationDTO.firstName())
                 .lastName(registrationDTO.lastName())
                 .activated(false) // new user is not active
-                .activationKey(RandomUtil.generateActivationKey()) // new user gets registration key
+                .activationKey(RandomUtil.generateActivationKey()) // new user gets activation key
                 .authorities(authorities)
                 .build();
         userRepository.save(newUser);
         log.debug("Created new record for User: {}", newUser.getEmail());
         return newUser;
+    }
+
+    @Transactional
+    public Optional<User> activateRegistration(String key) {
+        log.debug("Activating user for activation key {}", key);
+        return userRepository
+                .findOneByActivationKey(key)
+                .map(user -> {
+                    // activate given user for the activation key.
+                    user.setActivated(true);
+                    user.setActivationKey(null);
+                    log.debug("Activated user: {}", user);
+                    return user;
+                });
     }
 
     private static boolean isPasswordLengthInvalid(String password) {

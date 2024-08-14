@@ -60,6 +60,7 @@ public class SecurityConfig {
                 .requestMatchers("/ws/**").permitAll()
                 .requestMatchers(Constants.API_ENDPOINT_BASE + "/authenticate").permitAll()
                 .requestMatchers(Constants.API_ENDPOINT_BASE + "/register").permitAll()
+                .requestMatchers(Constants.API_ENDPOINT_BASE + "/activate").permitAll()
                 .anyRequest().authenticated()
             )
             .httpBasic(Customizer.withDefaults())

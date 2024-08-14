@@ -33,6 +33,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
     implementation 'org.springframework.security:spring-security-messaging'
     implementation 'org.springframework.ai:spring-ai-ollama-spring-boot-starter'
+    implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
 
     // JWT
     implementation "io.jsonwebtoken:jjwt-api:${jjwtVersion}"
@@ -53,6 +54,9 @@ dependencies {
     compileOnly "org.projectlombok:lombok"
     annotationProcessor "org.projectlombok:lombok"
     testAnnotationProcessor "org.projectlombok:lombok"
+
+    // email with SendGrid
+    implementation "com.sendgrid:sendgrid-java:${sendgridVersion}"
 
     implementation "org.apache.commons:commons-lang3"
 

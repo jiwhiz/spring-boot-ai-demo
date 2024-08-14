@@ -21,6 +21,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
+import org.springframework.web.socket.config.annotation.StompWebSocketEndpointRegistration;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
 import com.jiwhiz.demo.common.ApplicationProperties;
@@ -39,8 +40,12 @@ public class WebsocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(@NonNull StompEndpointRegistry registry) {
+        StompWebSocketEndpointRegistration reg = registry.addEndpoint("/ws");
+
         List<String> allowedOrigins = appProperties.getCors().getAllowedOrigins();
-        registry.addEndpoint("/ws").setAllowedOrigins(allowedOrigins.toArray(new String[allowedOrigins.size()])) ;
+        if (allowedOrigins != null){
+            reg.setAllowedOrigins(allowedOrigins.toArray(new String[allowedOrigins.size()])) ;
+        }
     }
 
     @Override

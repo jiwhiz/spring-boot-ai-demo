@@ -19,9 +19,24 @@ import java.util.List;
 @Getter
 public class ApplicationProperties {
 
+    private final Mail mail = new Mail();
+
     private final Security security = new Security();
 
     private final CorsConfiguration cors = new CorsConfiguration();
+
+    @Getter
+    @Setter
+    public static class Mail {
+
+        private boolean enabled = false;
+
+        private String from;
+
+        private String baseUrl;
+
+        private String apiKey;
+    }
 
     @Getter
     public static class Security {
