@@ -8,4 +8,4 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - ./devop/db/init/:/docker-entrypoint-initdb.d/
+      - ./src/main/resources/db/init/:/docker-entrypoint-initdb.d/
