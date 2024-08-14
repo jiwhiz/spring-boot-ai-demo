@@ -30,7 +30,7 @@ export class LoginComponent {
       next: (res) => {
         console.log(res);
         this.tokenService.token = res.token as string;
-        this.router.navigate(['home']);
+        this.router.navigate(['/home']);
       },
       error: (err) => {
         console.log(err);
@@ -44,6 +44,6 @@ export class LoginComponent {
   }
 
   register() {
-    this.router.navigate(['register']);
+    this.router.navigate(['/register']);
   }
 }
