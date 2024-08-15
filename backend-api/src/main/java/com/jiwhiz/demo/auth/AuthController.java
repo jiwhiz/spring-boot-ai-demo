@@ -13,6 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jiwhiz.demo.common.Constants;
 import com.jiwhiz.demo.security.JWTTokenService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,6 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping(Constants.API_ENDPOINT_BASE)
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name = "User login service", description = "Authentication by Spring Security.")
 public class AuthController {
 
     private final JWTTokenService jwtTokenService;
@@ -27,7 +36,23 @@ public class AuthController {
     private final AuthenticationManager authenticationManager;
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthResponseDTO> login(@RequestBody AuthRequestDTO authReqDto) {
+    @Operation(
+            summary = "Login with email and password.")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Return JWT token.",
+                    content = { @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = AuthResponseDTO.class)
+                    )}),
+            @ApiResponse(
+                    responseCode = "401",
+                    description = "Invalid login")
+    })
+    public ResponseEntity<AuthResponseDTO> login(
+        @Parameter(description = "Login credentials.") @Valid @RequestBody AuthRequestDTO authReqDto
+    ) {
         log.info("Login request received for user: {}", authReqDto.username());
         Authentication authenticate = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(authReqDto.username(), authReqDto.password()));
@@ -36,6 +61,5 @@ public class AuthController {
         log.info("Return JWT token: {}", token);
 
         return ResponseEntity.ok(new AuthResponseDTO(token));
-
     }
 }

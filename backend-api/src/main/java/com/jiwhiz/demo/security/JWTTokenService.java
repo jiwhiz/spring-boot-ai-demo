@@ -1,6 +1,5 @@
 package com.jiwhiz.demo.security;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
@@ -35,6 +34,7 @@ import javax.crypto.SecretKey;
 @Component
 @Slf4j
 public class JWTTokenService {
+
     private static final String INVALID_JWT_TOKEN = "Invalid JWT token.";
 
     private final SecretKey key;
@@ -53,7 +53,7 @@ public class JWTTokenService {
             keyBytes = Decoders.BASE64.decode(secret);
         } else {
             log.warn(
-                "Warning: the JWT key used is not Base64-encoded. " +
+                "Warning: the JWT secret key used is not Base64-encoded. " +
                 "We recommend using the `app.security.authentication.jwt.base64-secret` key for optimum security."
             );
             secret = appProperties.getSecurity().getAuthentication().getJwt().getSecret();

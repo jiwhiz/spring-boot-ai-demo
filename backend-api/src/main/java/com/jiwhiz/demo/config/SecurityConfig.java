@@ -57,6 +57,8 @@ public class SecurityConfig {
             .addFilterBefore(new JWTTokenFilter(jwtTokenService), UsernamePasswordAuthenticationFilter.class)
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .requestMatchers("/swagger-ui/**").permitAll()
+                .requestMatchers("/api-docs/**").permitAll()
                 .requestMatchers("/ws/**").permitAll()
                 .requestMatchers(Constants.API_ENDPOINT_BASE + "/authenticate").permitAll()
                 .requestMatchers(Constants.API_ENDPOINT_BASE + "/register").permitAll()

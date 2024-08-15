@@ -1,7 +1,5 @@
 package com.jiwhiz.demo.account;
 
-import static org.junit.Assert.assertThat;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.transaction.annotation.Transactional;
 

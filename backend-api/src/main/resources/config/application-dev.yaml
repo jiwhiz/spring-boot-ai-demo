@@ -27,6 +27,15 @@ spring:
       poolName: Hikari
       auto-commit: false
 
+springdoc:
+  api-docs:
+    enabled: true
+    path: /api-docs
+  swagger-ui:
+    enabled: true
+    tagsSorter: alpha
+    operationsSorter: alpha
+
 management:
   server:
     port: 8091

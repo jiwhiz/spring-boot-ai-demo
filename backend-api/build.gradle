@@ -58,6 +58,9 @@ dependencies {
     // email with SendGrid
     implementation "com.sendgrid:sendgrid-java:${sendgridVersion}"
 
+    // OpenAPI Doc
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springdocVersion}"
+
     implementation "org.apache.commons:commons-lang3"
 
     // Test

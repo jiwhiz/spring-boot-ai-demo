@@ -20,8 +20,10 @@ import com.jiwhiz.demo.external.MailService;
 import com.jiwhiz.demo.user.User;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 /**
  * REST controller for managing user account.
@@ -30,6 +32,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 @RequestMapping(Constants.API_ENDPOINT_BASE)
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name = "Account service", description = "AI Chatbot Demo API for managing user account.")
 public class AccountController {
 
     private final AccountService accountService;
@@ -38,8 +41,18 @@ public class AccountController {
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
+    @Operation(
+            summary = "Register a new user.")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "201",
+                    description = "User created."),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Invalid data supplied.")
+    })
     public void registerAccount(
-        @Valid @RequestBody RegistrationDTO registrationDTO
+        @Parameter(description = "New user profile.") @Valid @RequestBody RegistrationDTO registrationDTO
     ) {
         log.debug("Register a new user {}", registrationDTO);
         User user = accountService.registerUser(registrationDTO);
@@ -47,8 +60,18 @@ public class AccountController {
     }
 
     @GetMapping("/activate")
+    @Operation(
+            summary = "Activate the newly registered user.")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "User activated."),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Invalid activation key supplied.")
+    })
     public void activateAccount(
-            @RequestParam(value = "key") String key
+        @Parameter(description = "Activation key.", required = true) @RequestParam(value = "key") String key
     ) {
         Optional<User> user = accountService.activateRegistration(key);
         if (!user.isPresent()) {
