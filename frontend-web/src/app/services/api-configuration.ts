@@ -1,5 +1,3 @@
-/* tslint:disable */
-/* eslint-disable */
 import { Injectable } from '@angular/core';
 
 /**
@@ -9,7 +7,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ApiConfiguration {
-  rootUrl: string = 'http://localhost:8080/api/v1';
+  rootUrl: string = 'http://localhost:8081/api/v1';
+  wsBrokerUrl: string = 'ws://localhost:8081/ws';
 }
 
 /**

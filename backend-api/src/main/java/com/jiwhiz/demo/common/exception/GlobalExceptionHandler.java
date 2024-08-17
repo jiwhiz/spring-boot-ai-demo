@@ -1,4 +1,4 @@
-package com.jiwhiz.demo.common.rest;
+package com.jiwhiz.demo.common.exception;
 
 import java.net.URI;
 import java.time.Instant;
@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
-import com.jiwhiz.demo.common.exception.BusinessException;
 
 import jakarta.persistence.OptimisticLockException;
 import lombok.extern.slf4j.Slf4j;

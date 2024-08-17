@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../auth.service';
-import { AuthRequest } from '../auth-request';
+import { AuthenticationService } from './auth.service';
+import { AuthRequest } from './auth-request';
 import { TokenService } from '../../services/token/token.service';
 
 @Component({

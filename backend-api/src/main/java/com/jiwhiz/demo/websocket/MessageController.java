@@ -1,20 +1,19 @@
-package com.jiwhiz.demo.ws;
+package com.jiwhiz.demo.websocket;
 
 import java.util.function.Function;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Description;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.stereotype.Controller;
-import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Description;
 
-import com.jiwhiz.demo.ws.MessageController.MockWeatherService.WeatherRequest;
-import com.jiwhiz.demo.ws.MessageController.MockWeatherService.WeatherResponse;
-
+import com.jiwhiz.demo.websocket.MessageController.MockWeatherService.WeatherRequest;
+import com.jiwhiz.demo.websocket.MessageController.MockWeatherService.WeatherResponse;
 
 @Controller
 @RequiredArgsConstructor

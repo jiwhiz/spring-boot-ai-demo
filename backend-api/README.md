@@ -30,5 +30,5 @@ like `sdk use java 21.0.4-oracle`.
 ./gradlew bootRun --args='--spring.profiles.active=dev'
 ```
 
-Then you can open Swagger UI at http://localhost:8080/swagger-ui/index.html
+Then you can open Swagger UI at http://localhost:8081/swagger-ui/index.html
 

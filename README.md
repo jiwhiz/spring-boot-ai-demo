@@ -12,7 +12,7 @@ Then follow the setup instructions to start backend and frontend servers:
 - [Backend API Server Setup Instructions](/backend-api/README.md)
 - [Frontend Web UI Setup Instructions](/frontend-web/README.md)
 
-If everything goes well, you can open [http://localhost:8080](http://localhost:8080)
+If everything goes well, you can open [http://localhost:8081](http://localhost:8081)
 in any modern browser. You can register a new user account with email and password.
 From API server log, find the activation url, 
 and paste the url to the browser to activate your account.

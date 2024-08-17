@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Client, IFrame, Message, StompConfig } from '@stomp/stompjs';
-import { WebSocketService } from '../web-socket.service';
+import { WebSocketService } from './web-socket.service';
 
 @Component({
   selector: 'app-home',

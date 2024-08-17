@@ -72,7 +72,8 @@
               "buildTarget": "frontend-web:build:production"
             },
             "development": {
-              "buildTarget": "frontend-web:build:development"
+              "buildTarget": "frontend-web:build:development",
+              "port": 4201
             }
           },
           "defaultConfiguration": "development"

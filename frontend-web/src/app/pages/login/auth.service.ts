@@ -1,14 +1,12 @@
-/* tslint:disable */
-/* eslint-disable */
 import { HttpClient, HttpContext, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
-import { BaseService } from '../services/base-service';
-import { ApiConfiguration } from '../services/api-configuration';
-import { RequestBuilder } from '../services/request-builder';
-import { StrictHttpResponse } from '../services/strict-http-response';
+import { BaseService } from '../../services/base-service';
+import { ApiConfiguration } from '../../services/api-configuration';
+import { RequestBuilder } from '../../services/request-builder';
+import { StrictHttpResponse } from '../../services/strict-http-response';
 
 import { AuthRequest } from './auth-request';
 import { AuthResponse } from './auth-response';

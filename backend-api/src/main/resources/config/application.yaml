@@ -17,7 +17,3 @@ spring:
     basename: i18n/messages
   thymeleaf:
     mode: HTML
-
-
-server:
-  port: ${PORT:8080}

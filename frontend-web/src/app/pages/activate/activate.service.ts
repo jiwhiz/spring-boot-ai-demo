@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
-import { BaseService } from '../services/base-service';
-import { ApiConfiguration } from '../services/api-configuration';
-import { RequestBuilder } from '../services/request-builder';
-import { StrictHttpResponse } from '../services/strict-http-response';
+import { BaseService } from '../../services/base-service';
+import { ApiConfiguration } from '../../services/api-configuration';
+import { RequestBuilder } from '../../services/request-builder';
+import { StrictHttpResponse } from '../../services/strict-http-response';
 
 
 /** Path part for operation `activate()` */
