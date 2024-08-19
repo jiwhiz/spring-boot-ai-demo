@@ -18,7 +18,6 @@ public record RegistrationDTO (
 
         @NotNull
         @NotBlank
-        //@Size(min = 4, max = 20)
         String password,
 
         @Size(max = 100)

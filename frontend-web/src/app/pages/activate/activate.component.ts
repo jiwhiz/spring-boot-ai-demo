@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {ActivationService} from './activate.service';
-import {skipUntil} from 'rxjs';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ActivationService } from './activate.service';
+import { skipUntil } from 'rxjs';
 
 @Component({
   selector: 'app-activate',
@@ -43,10 +43,6 @@ export class ActivateAccountComponent implements OnInit {
 
   redirectToLogin() {
     this.router.navigate(['login']);
-  }
-
-  onCodeCompleted(token: string) {
-    this.activateAccount(token);
   }
 
   protected readonly skipUntil = skipUntil;

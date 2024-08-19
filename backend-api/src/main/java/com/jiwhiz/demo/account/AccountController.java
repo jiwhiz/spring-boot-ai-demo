@@ -54,7 +54,6 @@ public class AccountController {
     public void registerAccount(
         @Parameter(description = "New user profile.") @Valid @RequestBody RegistrationDTO registrationDTO
     ) {
-        log.debug("Register a new user {}", registrationDTO);
         User user = accountService.registerUser(registrationDTO);
         mailService.sendActivationEmail(user);
     }
@@ -78,5 +77,49 @@ public class AccountController {
             throw new AccountResourceException("No user was found for this activation key: " + key);
         }
     }
+
+    @PostMapping(path = "/reset-password/init")
+    @Operation(
+            summary = "Send an email to reset the password for a user.")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "User password reset started.")
+    })
+    public void requestPasswordReset(
+            @Parameter(description = "The email of the user.") @RequestBody ResetPasswordRequestDTO requestDto
+    ) {
+        Optional<User> user = accountService.requestPasswordReset(requestDto.email());
+        if (user.isPresent()) {
+            mailService.sendPasswordResetMail(user.get());
+        } else {
+            // Pretend the request has been successful to prevent checking which emails really exist
+            // but log that an invalid attempt has been made
+            log.warn("Password reset requested for non existing mail");
+        }
+    }
+
+    @PostMapping(path = "/reset-password/finish")
+    @Operation(
+            summary = "Finish to reset the password of the user.")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "User password reset finished."),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "The password is incorrect.")
+    })
+    public void finishPasswordReset(
+            @Parameter(description = "The reset key and new password.") @RequestBody ResetPasswordDTO keyAndPassword
+    ) {
+
+        Optional<User> user = accountService.completePasswordReset(keyAndPassword.newPassword(), keyAndPassword.key());
+
+        if (!user.isPresent()) {
+            throw new AccountResourceException("No user was found for this reset key");
+        }
+    }
+
 
 }

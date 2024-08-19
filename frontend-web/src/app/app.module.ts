@@ -12,6 +12,8 @@ import { ActivateAccountComponent } from './pages/activate/activate.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { InitResetPasswordComponent } from './pages/reset-password/init-reset-password.component'
+import { FinishResetPasswordComponent } from './pages/reset-password/finish-reset-password.component';
 import { HttpTokenInterceptor } from './services/interceptor/http-token.interceptor';
 
 
@@ -23,7 +25,9 @@ import { HttpTokenInterceptor } from './services/interceptor/http-token.intercep
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    ActivateAccountComponent
+    ActivateAccountComponent,
+    InitResetPasswordComponent,
+    FinishResetPasswordComponent
   ],
   imports: [
       BrowserModule,

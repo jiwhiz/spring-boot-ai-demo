@@ -6,6 +6,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ActivateAccountComponent } from './pages/activate/activate.component';
+import { InitResetPasswordComponent } from './pages/reset-password/init-reset-password.component';
+import { FinishResetPasswordComponent } from './pages/reset-password/finish-reset-password.component';
 import { authGuard } from './services/guard/auth.guard';
 
 export const routes: Routes = [
@@ -20,7 +22,9 @@ export const routes: Routes = [
     children: [
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
-      { path: 'activate', component: ActivateAccountComponent }
+      { path: 'activate', component: ActivateAccountComponent },
+      { path: 'reset-password/init', component: InitResetPasswordComponent },
+      { path: 'reset-password/finish', component: FinishResetPasswordComponent }
     ]
   },
   {

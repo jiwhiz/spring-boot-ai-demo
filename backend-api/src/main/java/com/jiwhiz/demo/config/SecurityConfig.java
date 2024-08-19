@@ -63,6 +63,8 @@ public class SecurityConfig {
                 .requestMatchers(Constants.API_ENDPOINT_BASE + "/authenticate").permitAll()
                 .requestMatchers(Constants.API_ENDPOINT_BASE + "/register").permitAll()
                 .requestMatchers(Constants.API_ENDPOINT_BASE + "/activate").permitAll()
+                .requestMatchers(Constants.API_ENDPOINT_BASE + "/reset-password/init").permitAll()
+                .requestMatchers(Constants.API_ENDPOINT_BASE + "/reset-password/finish").permitAll()
                 .anyRequest().authenticated()
             )
             .httpBasic(Customizer.withDefaults())

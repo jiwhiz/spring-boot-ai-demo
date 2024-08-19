@@ -47,6 +47,11 @@ public class MailService {
         sendEmailFromTemplate(user, "mail/activationEmail", "email.activation.title");
     }
 
+    public void sendPasswordResetMail(User user) {
+        log.debug("Sending password reset email to '{}'", user.getEmail());
+        sendEmailFromTemplate(user, "mail/passwordResetEmail", "email.reset.title");
+    }
+
     public void sendEmailFromTemplate(User user, String templateName, String titleKey) {
         Locale locale = Locale.forLanguageTag("en");
         Context context = new Context(locale);

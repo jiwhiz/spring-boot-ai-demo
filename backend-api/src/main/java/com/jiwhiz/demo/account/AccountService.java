@@ -1,5 +1,7 @@
 package com.jiwhiz.demo.account;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -9,15 +11,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 import com.jiwhiz.demo.common.utils.RandomUtil;
 import com.jiwhiz.demo.security.AuthoritiesConstants;
 import com.jiwhiz.demo.user.Authority;
 import com.jiwhiz.demo.user.AuthorityRepository;
 import com.jiwhiz.demo.user.User;
 import com.jiwhiz.demo.user.UserRepository;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
@@ -36,6 +38,8 @@ public class AccountService {
 
     @Transactional
     public User registerUser(RegistrationDTO registrationDTO) {
+        log.debug("Register a new user {}", registrationDTO);
+
         if (isPasswordLengthInvalid(registrationDTO.password())) {
             throw new InvalidPasswordException();
         }
@@ -79,6 +83,39 @@ public class AccountService {
                     return user;
                 });
     }
+
+    @Transactional
+    public Optional<User> requestPasswordReset(String mail) {
+        log.debug("User request to reset password for email {}", mail);
+        return userRepository
+                .findOneByEmailIgnoreCase(mail)
+                .filter(User::isActivated)
+                .map(user -> {
+                    user.setResetKey(RandomUtil.generateResetKey());
+                    user.setResetDate(Instant.now());
+                    return user;
+                });
+    }
+
+    @Transactional
+    public Optional<User> completePasswordReset(String newPassword, String key) {
+        log.debug("Reset user password for reset key {}", key);
+
+        if (isPasswordLengthInvalid(newPassword)) {
+            throw new InvalidPasswordException();
+        }
+
+        return userRepository
+                .findOneByResetKey(key)
+                .filter(user -> user.getResetDate().isAfter(Instant.now().minus(1, ChronoUnit.DAYS)))
+                .map(user -> {
+                    user.setPassword(passwordEncoder.encode(newPassword));
+                    user.setResetKey(null);
+                    user.setResetDate(null);
+                    return user;
+                });
+    }
+
 
     private static boolean isPasswordLengthInvalid(String password) {
         return (
